@@ -1,0 +1,223 @@
+.dancing-cat-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  perspective: 1000px;
+}
+
+.cat-wrapper {
+  position: relative;
+  margin-bottom: 3rem;
+  transform-style: preserve-3d;
+  z-index: 10;
+}
+
+.cat-image {
+  width: 250px;
+  height: 250px;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+}
+
+.cat-wrapper.dancing .cat-image {
+  animation:
+    dance-jump 2s ease-in-out infinite,
+    dance-wiggle 1s ease-in-out infinite,
+    dance-rotate 4s linear infinite;
+}
+
+@keyframes dance-jump {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-30px) scale(1.1);
+  }
+  50% {
+    transform: translateY(-50px) scale(1.2);
+  }
+  75% {
+    transform: translateY(-30px) scale(1.1);
+  }
+}
+
+@keyframes dance-wiggle {
+  0%, 100% {
+    transform: rotateZ(0deg);
+  }
+  25% {
+    transform: rotateZ(-10deg);
+  }
+  75% {
+    transform: rotateZ(10deg);
+  }
+}
+
+@keyframes dance-rotate {
+  0% {
+    transform: rotateY(0deg);
+  }
+  25% {
+    transform: rotateY(90deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  75% {
+    transform: rotateY(270deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+.controls {
+  margin-top: 2rem;
+  z-index: 10;
+  text-align: center;
+}
+
+.keyboard-hint {
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.dance-button {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  border: none;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+  transition: all 0.3s ease;
+  transform: translateY(0);
+}
+
+.dance-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(255, 107, 107, 0.4);
+}
+
+.dance-button:active {
+  transform: translateY(-1px);
+}
+
+.dance-button.stop {
+  background: linear-gradient(45deg, #ff4757, #c44569);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.05) translateY(-2px);
+  }
+}
+
+.stage {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 20px;
+  background: linear-gradient(90deg, #ff6b6b, #ee5a24, #ff9ff3, #54a0ff);
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.stage-light {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  top: -150px;
+  animation: stage-lights 3s ease-in-out infinite;
+}
+
+.stage-light-2 {
+  left: 30%;
+  animation-delay: -1s;
+  background: radial-gradient(circle, rgba(255, 107, 107, 0.4) 0%, transparent 70%);
+}
+
+.stage-light-3 {
+  right: 30%;
+  animation-delay: -2s;
+  background: radial-gradient(circle, rgba(84, 160, 255, 0.4) 0%, transparent 70%);
+}
+
+@keyframes stage-lights {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
+
+.cat-wrapper.dancing {
+  animation: stage-bounce 2s ease-in-out infinite;
+}
+
+@keyframes stage-bounce {
+  0%, 100% {
+    transform: translateY(0) rotateY(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotateY(5deg);
+  }
+  50% {
+    transform: translateY(-20px) rotateY(-5deg);
+  }
+  75% {
+    transform: translateY(-10px) rotateY(5deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .cat-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .dance-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .stage {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .cat-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .dance-button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .stage-light {
+    width: 60px;
+    height: 60px;
+    top: -100px;
+  }
+}
